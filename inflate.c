@@ -5,7 +5,7 @@ void inflate(FILE *infile, FILE *outfile)
 	static unsigned char block[0x80000];
 	static unsigned char buffer[0x100000];
 	huffman_header_t hdr;
-    static huffman_t maintree[512];
+	static huffman_t maintree[512];
 	fseek(infile, 0, SEEK_SET);
 	while(fread(&hdr, sizeof(hdr), 1, infile) > 0) {
         if(hdr.treesize < 1 || hdr.treesize > 512) {
@@ -31,17 +31,17 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Can not open input file: %s", argv[1]);
 		return 0;
 	}
-    if(argc == 2) {
-        inflate(infile, stdout);
-    } else {
-	    outfile = fopen(argv[2], "wb");
-	    if(outfile == NULL) {
-		    fprintf(stderr, "Can not open output file: %s", argv[1]);
-		    return 0;
-	    }
-	    inflate(infile, outfile);
-	    fclose(outfile);
-    }
+	if(argc == 2) {
+		inflate(infile, stdout);
+	} else {
+		outfile = fopen(argv[2], "wb");
+		if(outfile == NULL) {
+			fprintf(stderr, "Can not open output file: %s", argv[1]);
+			return 0;
+		}
+		inflate(infile, outfile);
+		fclose(outfile);
+	}
 	fclose(infile);
 	return 0;
 }

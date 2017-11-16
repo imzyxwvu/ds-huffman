@@ -5,7 +5,7 @@ void deflate(FILE *infile, FILE *outfile)
 	static unsigned char block[BLOCK_SIZE];
 	static unsigned char buffer[BLOCK_SIZE * 2];
 	huffman_header_t hdr;
-    static huffman_t maintree[512];
+	static huffman_t maintree[512];
 	size_t nread;
 	while((nread = fread(block, 1, BLOCK_SIZE, infile)) > 0) {
 		hdr.blocklen = nread;
